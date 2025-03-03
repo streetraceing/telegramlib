@@ -31,7 +31,7 @@ Maven:
 Дополнительные зависимости:
 - Единственная необходимая зависимость - [Gson 2.12.1](https://github.com/google/gson/releases/tag/gson-parent-2.12.1), цель которой работа с Json.
 
-## Документация
+## Документация.
 
 ### Приступаем к работе.
 Начать работу с библиотекой можно через создание экземпляра бота, это требует токен бота.<br>
@@ -63,9 +63,7 @@ public class Main {
         String token = args[0];
         Bot bot = new Bot(token);
 
-        bot.onText(msg -> {
-            msg.reply("Hello World!");
-        });
+        bot.onText(msg -> msg.reply("Hello World!"));
     }
 }
 ```
@@ -201,3 +199,9 @@ public class ReplyParameters extends JsonObject {
     }
 }
 ```
+
+## Цели проекта.
+На данный момент установлен небольшой список целей, которые необходимо выполнить как можно быстрее. В будущем этот раздел будет изменяться.
+
+- Портировать [все доступные методы](https://core.telegram.org/bots/api#available-methods) в `net.strdev.telegramlib.requests`, а так же необходимые для их использования сериализируемые классы.
+- Загрузить репозиторий в Maven Central.

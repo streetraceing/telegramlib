@@ -13,7 +13,7 @@ public class Example {
 
         bot.sendRequest(
                 new sendMessage()
-                        .chat_id(0)
+                        .chat_id(target_user_id)
                         .text(text)
         );
     }
