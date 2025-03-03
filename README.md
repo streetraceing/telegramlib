@@ -205,3 +205,5 @@ public class ReplyParameters extends JsonObject {
 
 - Портировать [все доступные методы](https://core.telegram.org/bots/api#available-methods) в `net.strdev.telegramlib.requests`, а так же необходимые для их использования сериализируемые классы.
 - Создать репозиторий для загрузки библиотеки.
+- Добавить документацию с типами (?)
+- Расписать в README файле также про TelegramException, Создание клавиатур.
