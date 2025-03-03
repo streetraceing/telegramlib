@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class ReplyKeyboardRemove extends TelegramSerializable {
+public class ReplyKeyboardRemove extends JsonObject {
     public ReplyKeyboardRemove() {
         add("remove_keyboard", true);
     }

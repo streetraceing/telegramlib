@@ -1,13 +1,13 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class ReplyKeyboardMarkup extends TelegramSerializable {
+public class ReplyKeyboardMarkup extends JsonObject {
     public ReplyKeyboardMarkup keyboard(KeyboardButton[][] value) {
-        add("keyboard", Arrays.stream(value).map(n -> Arrays.stream(n).map(TelegramSerializable::asMap).collect(Collectors.toList())).collect(Collectors.toList()));
+        add("keyboard", Arrays.stream(value).map(n -> Arrays.stream(n).map(JsonObject::asMap).collect(Collectors.toList())).collect(Collectors.toList()));
         return this;
     }
 

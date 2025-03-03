@@ -33,7 +33,6 @@ public class Bot {
     public void debug(DebugLevel level) {
         this.polling.metrics.debug();
         Logging.debug(level);
-        //Requests.metrics.debug();
 
         Logging.log("Bot", "Debugger is active.");
     }

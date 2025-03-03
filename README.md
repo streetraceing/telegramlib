@@ -16,9 +16,9 @@ dependencies {
 Maven:
 ```xml
 <dependency>
-  <groupId>net.strdev.telegramlib</groupId>
-  <artifactId>TelegramLib</artifactId>
-  <version>1.3.0</version>
+    <groupId>net.strdev.telegramlib</groupId>
+    <artifactId>TelegramLib</artifactId>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -140,13 +140,13 @@ public class sendPhoto extends TelegramRequest {
         addQuery("chat_id", value);
         return this;
     }
-    
+
     // Сеттер параметра photo, принимающий ID файла или ссылку на него
     public sendPhoto photo(String value) {
         addQuery("photo", value);
         return this;
     }
-    
+
     // Сеттер параметра photo, принимающий InputFile (нереализованный класс в библиотеке,
     // в данном случае это используется для примера,
     // Похожие классы можно создать, наследовавшись от JsonObject или JsonArray 
@@ -187,14 +187,14 @@ public class ReplyParameters extends JsonObject {
         add("chat_id", value);
         return this;
     }
-    
+
     // ... 
 
     public ReplyParameters quote_entities(MessageEntity[] value) {
         // В Telegram API такой входящий параметр подразумевается
         // как Array of MessageEntity. Прохождение по всем элементам массива с lambda
         // выражением необходимо для избежания ошибок сериализации.
-        add("quote_entities", 
+        add("quote_entities",
                 Arrays.stream(value).map(MessageEntity::asMap).collect(Collectors.toList())
         );
         return this;

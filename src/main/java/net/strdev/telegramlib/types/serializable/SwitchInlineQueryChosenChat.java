@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class SwitchInlineQueryChosenChat extends TelegramSerializable {
+public class SwitchInlineQueryChosenChat extends JsonObject {
     public SwitchInlineQueryChosenChat query(String value) {
         add("query", value);
         return this;

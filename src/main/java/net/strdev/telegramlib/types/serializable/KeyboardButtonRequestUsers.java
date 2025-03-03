@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class KeyboardButtonRequestUsers extends TelegramSerializable {
+public class KeyboardButtonRequestUsers extends JsonObject {
     public KeyboardButtonRequestUsers request_id(int value) {
         add("request_id", value);
         return this;

@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class LoginUrl extends TelegramSerializable {
+public class LoginUrl extends JsonObject {
     public LoginUrl url(String value) {
         add("url", value);
         return this;

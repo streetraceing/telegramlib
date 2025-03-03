@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class KeyboardButtonRequestChat extends TelegramSerializable {
+public class KeyboardButtonRequestChat extends JsonObject {
     public KeyboardButtonRequestChat user_administrator_rights(ChatAdministratorRights value) {
         add("user_administrator_rights", null);
         return this;

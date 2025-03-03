@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class ForceReply extends TelegramSerializable {
+public class ForceReply extends JsonObject {
     public ForceReply() {
         add("force_reply", true);
     }

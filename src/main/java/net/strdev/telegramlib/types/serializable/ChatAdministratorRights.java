@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types.serializable;
 
-import net.strdev.telegramlib.types.serializable.base.TelegramSerializable;
+import net.strdev.telegramlib.types.serializable.base.JsonObject;
 
-public class ChatAdministratorRights extends TelegramSerializable {
+public class ChatAdministratorRights extends JsonObject {
     public ChatAdministratorRights is_anonymous(boolean value) {
         add("is_anonymous", value);
         return this;
