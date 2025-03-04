@@ -69,7 +69,7 @@ public class Main {
 }
 ```
 ### Встроенные функции
-В экземпляре класса доступны базовые методы, такие как `sendText`, `addReaction`, `replyMessageText`, `deleteMessage`, `editTextMessage`.
+В экземпляре класса бота доступны базовые методы, такие как `sendText`, `addReaction`, `replyMessageText`, `deleteMessage`, `editTextMessage`.
 
 Также в `CommandResponse` и `MessageScheme` возвращаются методы взаимодействия с сообщением: `send`, `reply`, `react`.
 
@@ -167,10 +167,10 @@ public class Main {
         String token = args[0];
         Bot bot = new Bot(token);
 
-        int target_user_id = 0;
+        long target_user_id = 0;
         String text = "Message";
 
-        bot.sendRequest(new sendMessage().chat_id(0).text(text));
+        bot.sendRequest(new sendMessage().chat_id(target_user_id).text(text));
     }
 }
 ```
@@ -295,4 +295,4 @@ public class Example {
 
 - Портировать [все доступные методы](https://core.telegram.org/bots/api#available-methods) в `net.strdev.telegramlib.requests`, а так же необходимые для их использования сериализируемые классы.
 - Создать репозиторий для загрузки библиотеки.
-- Добавить документацию с типами. (?)
+- Добавить документацию с типами данных при запросах.
