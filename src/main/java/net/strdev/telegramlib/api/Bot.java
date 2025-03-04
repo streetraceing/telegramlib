@@ -39,11 +39,11 @@ public class Bot {
 
     // Default methods
 
-    public void editMessageText(long chat_id, Integer message_id, String text) {
+    public void editTextMessage(long chat_id, Integer message_id, String text) {
         sendRequest(new editMessageText().chat_id(chat_id).message_id(message_id).text(text));
     }
 
-    public void editMessageText(String chat_id, Integer message_id, String text) {
+    public void editTextMessage(String chat_id, Integer message_id, String text) {
         sendRequest(new editMessageText().chat_id(chat_id).message_id(message_id).text(text));
     }
 
@@ -55,11 +55,11 @@ public class Bot {
         sendRequest(new deleteMessage().chat_id(chat_id).message_id(message_id));
     }
 
-    public void replyMessage(long chat_id, Integer message_id, String text) {
+    public void replyMessageText(long chat_id, Integer message_id, String text) {
         sendRequest(new sendMessage().chat_id(chat_id).text(text).reply_parameters(new ReplyParameters(message_id)));
     }
 
-    public void replyMessage(String chat_id, Integer message_id, String text) {
+    public void replyMessageText(String chat_id, Integer message_id, String text) {
         sendRequest(new sendMessage().chat_id(chat_id).text(text).reply_parameters(new ReplyParameters(message_id)));
     }
 

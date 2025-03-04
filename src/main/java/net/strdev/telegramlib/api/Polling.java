@@ -32,10 +32,10 @@ public class Polling {
             if(response.result == null || response.result.isEmpty()) {
                 Logging.warn("Polling", "Update response is empty.");
                 return;
-            };
+            }
             if(!response.ok) {
                 TelegramException e = new TelegramException(response.error_code, response.description);
-                e.printStackTrace();
+                System.out.println(e.getMessage());
                 throw e;
             }
 

@@ -20,12 +20,13 @@ public class MessageScheme {
         this.message_id = message.message_id;
     }
 
-    public void send(String text) {
+    public int send(String text) {
         bot.sendText(text, chat.id);
+        return message_id+1;
     }
 
     public int reply(String text) {
-        bot.replyMessage(chat.id, message_id, text);
+        bot.replyMessageText(chat.id, message_id, text);
         return message_id+1;
     }
 

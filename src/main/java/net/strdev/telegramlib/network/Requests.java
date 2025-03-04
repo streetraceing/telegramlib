@@ -20,21 +20,7 @@ public final class Requests {
         this.token = token;
     }
 
-    @Deprecated
-    private static String get(HttpsRequest request) {
-        StringBuilder response = new StringBuilder();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(request.asString()).openStream()));
-            int c;
-            while ((c = reader.read()) != -1) { response.append((char) c); }
-            return response.toString();
-        } catch (IOException e) {
-            //System.out.println(e.getMessage());
-        }
-        return response.toString();
-    }
-
-    public static String getV2(HttpsRequest request) {
+    public static String get(HttpsRequest request) {
         metrics.updateStartTime();
         StringBuilder response = new StringBuilder();
         try {
@@ -53,7 +39,7 @@ public final class Requests {
             }
 
             reader.lines().forEach(response::append);
-            metrics.handle("getV2 Request");
+            metrics.handle("Get Request");
             return response.toString();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -62,15 +48,15 @@ public final class Requests {
     }
 
     public void sendRequest(HttpsRequest request) {
-        Response response = Json.parseResponse(getV2(request));
+        Response response = Json.parseResponse(get(request));
         if(!response.ok) {
             TelegramException e = new TelegramException(response.error_code, response.description);
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw e;
         }
     }
 
     public Updates getUpdates(Integer offset) {
-        return Json.parseUpdates(getV2(new getUpdates(token).offset(offset)));
+        return Json.parseUpdates(get(new getUpdates(token).offset(offset)));
     }
 }
