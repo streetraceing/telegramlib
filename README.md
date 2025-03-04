@@ -2,38 +2,22 @@
 
 TelegramLib - это библиотека, реализованная по основам Telegram Bot API. В проекте использованы возможности Java 8 версии. Кратко можно сказать, что в ней присутствует большинство взаимодействий с телеграм ботами. Это небольшой проект быстрой, удобной и гибкой библиотеки с целью создания и масштабирования ботов Telegram.
 
-## Использование:
+## Использование
 > [!NOTE]\
 > Загрузка с помощью Maven и Gradle не реализована.
 
-Gradle:
-```gradle
-dependencies {
-  implementation 'net.strdev.telegramlib:TelegramLib:1.3.0'
-}
-```
-
-Maven:
-```xml
-<dependency>
-    <groupId>net.strdev.telegramlib</groupId>
-    <artifactId>TelegramLib</artifactId>
-    <version>1.3.0</version>
-</dependency>
-```
-
 [TelegramLib jar](https://github.com/streetraceing/telegramlib/releases) файлы можно скачать с релизов на Github.
 
-## Требования:
+## Требования
 Минимальная версия Java:
 - TelegramLib 1.3.0: `Java 8`
 
 Дополнительные зависимости:
-- Единственная необходимая зависимость - [Gson 2.12.1](https://github.com/google/gson/releases/tag/gson-parent-2.12.1), цель которой работа с Json.
+- [Gson 2.12.1](https://github.com/google/gson/releases/tag/gson-parent-2.12.1)
 
-## Документация.
+## Документация
 
-### Приступаем к работе.
+### Приступаем к работе
 Начать работу с библиотекой можно через создание экземпляра бота, это требует токен бота.<br>
 [Как получить токен?](https://core.telegram.org/bots/tutorial#getting-ready)
 ```java
@@ -48,7 +32,7 @@ public class Main {
 ```
 Класс бота при инициализации включает Polling (постоянную отправку запросов `/getUpdates`), для дальнейшей работы необходимо создавать ивенты.
 
-### Регистрация ивентов.
+### Регистрация ивентов
 Чтобы зарегистрировать любой ивент используются методы, начинающиеся на `on` в экземпляре бота. <br>
 Доступные ивенты на данный момент: `onText`, `onCommand`, `onEdit`, `onPhoto`, `onSticker`, `onAudio`, `onVideo`, `onPoll`, `onLocation`, `onDocument`, `onContact`, `onStory`, `onVoice`, `onAnimation`, `onDice`, `onCallbackQuery`.
 
@@ -84,6 +68,90 @@ public class Main {
     }
 }
 ```
+### Встроенные функции
+В экземпляре класса доступны базовые методы, такие как `sendText`, `addReaction`, `replyMessageText`, `deleteMessage`, `editTextMessage`.
+
+Также в `CommandResponse` и `MessageScheme` возвращаются методы взаимодействия с сообщением: `send`, `reply`, `react`.
+
+### Работа с клавиатурами
+Допустим, спросим пользователя о его состоянии. После команды `/start` отправится сообщение "Как дела?", имеющее Inline-клавиатуру с выбором.
+```java
+import net.strdev.telegramlib.api.Bot;
+import net.strdev.telegramlib.commands.CommandHandler;
+import net.strdev.telegramlib.requests.sendMessage;
+import net.strdev.telegramlib.types.serializable.InlineKeyboardButton;
+import net.strdev.telegramlib.types.serializable.InlineKeyboardMarkup;
+
+public class Example {
+    public static void main(String[] args) {
+        String token = args[0];
+        Bot bot = new Bot(token);
+
+        bot.onCommand(new CommandHandler("start", response -> {
+            bot.sendRequest(
+                    new sendMessage().chat_id(response.chat.id).text("Как дела?")
+                    .reply_markup(new InlineKeyboardMarkup(
+                    new InlineKeyboardButton[][]{{
+                        new InlineKeyboardButton().text("Всё отлично!"),
+                        new InlineKeyboardButton().text("Не очень.")
+                    }}))
+            );
+        }));
+    }
+}
+```
+
+Или отправим встроенную в приложение одноразовую клавиатуру.
+```java
+import net.strdev.telegramlib.api.Bot;
+import net.strdev.telegramlib.commands.CommandHandler;
+import net.strdev.telegramlib.requests.sendMessage;
+import net.strdev.telegramlib.types.serializable.KeyboardButton;
+import net.strdev.telegramlib.types.serializable.ReplyKeyboardMarkup;
+
+public class Example {
+    public static void main(String[] args) {
+        String token = args[0];
+        Bot bot = new Bot(token);
+
+        bot.onCommand(new CommandHandler("start", response -> {
+            bot.sendRequest(
+                    new sendMessage().chat_id(response.chat.id).text("Как дела?")
+                            .reply_markup(new ReplyKeyboardMarkup().one_time_keyboard(true).keyboard(
+                                    new KeyboardButton[][]
+                                            {
+                                                    { new KeyboardButton().text("Всё хорошо!") },
+                                                    { new KeyboardButton().text("Не очень.") }
+                                            }
+                            ))
+            );
+        }));
+    }
+}
+```
+Встроенные клавиатуры могут быть удалены у пользователя:
+```java
+import net.strdev.telegramlib.api.Bot;
+import net.strdev.telegramlib.commands.CommandHandler;
+import net.strdev.telegramlib.requests.sendMessage;
+import net.strdev.telegramlib.types.serializable.ReplyKeyboardRemove;
+
+public class Example {
+    public static void main(String[] args) {
+        String token = args[0];
+        Bot bot = new Bot(token);
+
+        bot.onCommand(new CommandHandler("remove_keyboard", response -> {
+            bot.sendRequest(
+                    new sendMessage().chat_id(response.chat.id).text("Удаляем клавиатуру...")
+                    .reply_markup(new ReplyKeyboardRemove())
+            );
+        }));
+    }
+}
+
+```
+
 ### Нестандартные функции
 Под этим понятием подразумевается использование `bot.sendRequest(TelegramRequest ...)`. В библиотеке используется гибкое построение https запросов. Использование таковых выглядит так.
 
@@ -110,7 +178,7 @@ public class Main {
     }
 }
 ```
-#### Создание своих запросов
+### Создание своих запросов
 Для того, чтобы сделать свой запрос к Telegram API от имени бота необходимо создать новый класс, наследованный от `TelegramRequest`. Подробнее про все доступные методы можно прочитать [по ссылке.](https://core.telegram.org/bots/api#available-methods)
 
 Например, создадим урезанный запрос `sendPhoto`, имеющий в параметрах только `chat_id` и `photo`.
@@ -199,11 +267,36 @@ public class ReplyParameters extends JsonObject {
     }
 }
 ```
+### Отслеживание ошибок Telegram API
+При работе с методом `sendRequest` в экземпляре класса бота или в `Requests.java` можно встретить TelegramException, которая оборачивается в `try/catch`. [Ошибки, с которыми можно встретиться.](https://core.telegram.org/file/400780400470/3/OY6JMkb69K4.143326.json/3c10f72ff9ce45e8a9)
 
-## Цели проекта.
+Напишем простую команду, которая позволяет пользователю поставить реакцию на своё сообщение.
+```java
+import net.strdev.telegramlib.api.Bot;
+import net.strdev.telegramlib.commands.CommandHandler;
+import net.strdev.telegramlib.network.TelegramException;
+
+public class Example {
+    public static void main(String[] args) {
+        String token = args[0];
+        Bot bot = new Bot(token);
+
+        bot.onCommand(new CommandHandler("react", response -> {
+            String emoji = response.args[0];
+
+            try {
+                response.react(emoji);
+            } catch (TelegramException exception) {
+                response.reply("Вы ввели некорректный эмодзи!");
+            }
+        }));
+    }
+}
+```
+
+## Цели проекта
 На данный момент установлен небольшой список целей, которые необходимо выполнить как можно быстрее. В будущем этот раздел будет изменяться.
 
 - Портировать [все доступные методы](https://core.telegram.org/bots/api#available-methods) в `net.strdev.telegramlib.requests`, а так же необходимые для их использования сериализируемые классы.
 - Создать репозиторий для загрузки библиотеки.
-- Добавить документацию с типами (?)
-- Расписать в README файле также про TelegramException, Создание клавиатур.
+- Добавить документацию с типами. (?)
