@@ -117,13 +117,13 @@ public class Example {
         bot.onCommand(new CommandHandler("start", response -> {
             bot.sendRequest(
                     new sendMessage().chat_id(response.chat.id).text("Как дела?")
-                            .reply_markup(new ReplyKeyboardMarkup().one_time_keyboard(true).keyboard(
-                                    new KeyboardButton[][]
-                                            {
-                                                    { new KeyboardButton().text("Всё хорошо!") },
-                                                    { new KeyboardButton().text("Не очень.") }
-                                            }
-                            ))
+                    .reply_markup(new ReplyKeyboardMarkup().one_time_keyboard(true).keyboard(
+                        new KeyboardButton[][]
+                            {
+                                { new KeyboardButton().text("Всё хорошо!") },
+                                { new KeyboardButton().text("Не очень.") }
+                            }
+                    ))
             );
         }));
     }
