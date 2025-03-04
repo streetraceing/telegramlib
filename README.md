@@ -116,14 +116,14 @@ public class Example {
 
         bot.onCommand(new CommandHandler("start", response -> {
             bot.sendRequest(
-                    new sendMessage().chat_id(response.chat.id).text("Как дела?")
-                    .reply_markup(new ReplyKeyboardMarkup().one_time_keyboard(true).keyboard(
-                        new KeyboardButton[][]
-                            {
-                                { new KeyboardButton().text("Всё хорошо!") },
-                                { new KeyboardButton().text("Не очень.") }
-                            }
-                    ))
+                new sendMessage().chat_id(response.chat.id).text("Как дела?")
+                .reply_markup(new ReplyKeyboardMarkup().one_time_keyboard(true).keyboard(
+                    new KeyboardButton[][]
+                        {
+                            { new KeyboardButton().text("Всё хорошо!") },
+                            { new KeyboardButton().text("Не очень.") }
+                        }
+                ))
             );
         }));
     }
@@ -143,8 +143,8 @@ public class Example {
 
         bot.onCommand(new CommandHandler("remove_keyboard", response -> {
             bot.sendRequest(
-                    new sendMessage().chat_id(response.chat.id).text("Удаляем клавиатуру...")
-                    .reply_markup(new ReplyKeyboardRemove())
+                new sendMessage().chat_id(response.chat.id).text("Удаляем клавиатуру...")
+                .reply_markup(new ReplyKeyboardRemove())
             );
         }));
     }
@@ -170,11 +170,7 @@ public class Main {
         int target_user_id = 0;
         String text = "Message";
 
-        bot.sendRequest(
-                new sendMessage()
-                        .chat_id(0)
-                        .text(text)
-        );
+        bot.sendRequest(new sendMessage().chat_id(0).text(text));
     }
 }
 ```
