@@ -62,7 +62,7 @@ public class Main {
         Bot bot = new Bot(token);
 
         bot.onCommand(new CommandHandler("/start", response -> {
-            String arg1 = args[0];
+            String arg1 = response.args[0];
             System.out.println("Вы написали: " + arg1);
         }));
     }
