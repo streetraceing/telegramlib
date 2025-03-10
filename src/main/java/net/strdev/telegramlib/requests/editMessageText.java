@@ -1,12 +1,13 @@
 package net.strdev.telegramlib.requests;
 
 import net.strdev.telegramlib.json.Json;
-import net.strdev.telegramlib.json.types.base.InlineKeyboardMarkup;
 import net.strdev.telegramlib.json.types.base.LinkPreviewOptions;
-import net.strdev.telegramlib.json.types.base.MessageEntity;
 import net.strdev.telegramlib.network.TelegramRequest;
+import net.strdev.telegramlib.types.serializable.InlineKeyboardMarkup;
+import net.strdev.telegramlib.types.serializable.MessageEntity;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class editMessageText extends TelegramRequest {
     public editMessageText(String token) {
@@ -52,8 +53,8 @@ public class editMessageText extends TelegramRequest {
         return this;
     }
 
-    public editMessageText entities(List<MessageEntity> value) {
-        addQuery("entities", Json.parser.toJson(value));
+    public editMessageText entities(MessageEntity[] value) {
+        addQuery("entities", Arrays.stream(value).map(MessageEntity::asString).collect(Collectors.toList()));
         return this;
     }
 
@@ -63,7 +64,7 @@ public class editMessageText extends TelegramRequest {
     }
 
     public editMessageText reply_markup(InlineKeyboardMarkup value) {
-        addQuery("reply_markup", Json.parser.toJson(value));
+        addQuery("reply_markup", value.asString());
         return this;
     }
 }

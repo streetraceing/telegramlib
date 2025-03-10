@@ -81,8 +81,8 @@ public class Bot {
 
     // Advanced methods
 
-    public void sendRequest(TelegramRequest request) {
-        requests.sendRequest(request.setToken(this.token));
+    public String sendRequest(TelegramRequest request) {
+        return requests.sendRequest(request.setToken(this.token));
     }
 
     // Events

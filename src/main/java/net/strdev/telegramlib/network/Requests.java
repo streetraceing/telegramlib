@@ -47,13 +47,15 @@ public final class Requests {
         return "";
     }
 
-    public void sendRequest(HttpsRequest request) {
-        Response response = Json.parseResponse(get(request));
+    public String sendRequest(HttpsRequest request) {
+        String res = get(request);
+        Response response = Json.parseResponse(res);
         if(!response.ok) {
             TelegramException e = new TelegramException(response.error_code, response.description);
             System.out.println(e.getMessage());
             throw e;
         }
+        return res;
     }
 
     public Updates getUpdates(Integer offset) {

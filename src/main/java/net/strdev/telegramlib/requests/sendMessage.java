@@ -5,11 +5,14 @@ import net.strdev.telegramlib.json.types.base.*;
 import net.strdev.telegramlib.network.TelegramRequest;
 import net.strdev.telegramlib.types.serializable.ForceReply;
 import net.strdev.telegramlib.types.serializable.InlineKeyboardMarkup;
+import net.strdev.telegramlib.types.serializable.MessageEntity;
 import net.strdev.telegramlib.types.serializable.ReplyKeyboardMarkup;
 import net.strdev.telegramlib.types.serializable.ReplyKeyboardRemove;
 import net.strdev.telegramlib.types.serializable.ReplyParameters;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class sendMessage extends TelegramRequest {
     public sendMessage(String token) {
@@ -18,10 +21,6 @@ public class sendMessage extends TelegramRequest {
 
     public sendMessage() {
         super("sendMessage");
-    }
-
-    public void token(String token) {
-        this.setToken(token);
     }
 
     public sendMessage business_connection_id(String value) {
@@ -54,8 +53,8 @@ public class sendMessage extends TelegramRequest {
         return this;
     }
 
-    public sendMessage entities(List<MessageEntity> value) {
-        addQuery("entities", Json.parser.toJson(value));
+    public sendMessage entities(MessageEntity[] value) {
+        addQuery("entities", Arrays.stream(value).map(MessageEntity::asString).collect(Collectors.toList()));
         return this;
     }
 
