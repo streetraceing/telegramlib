@@ -1,8 +1,8 @@
 package net.strdev.telegramlib.types;
 
 import net.strdev.telegramlib.api.Bot;
-import net.strdev.telegramlib.json.types.Message;
 import net.strdev.telegramlib.json.types.ForwardedMessage;
+import net.strdev.telegramlib.json.types.Message;
 import net.strdev.telegramlib.json.types.base.Chat;
 import net.strdev.telegramlib.json.types.base.MessageEntity;
 import net.strdev.telegramlib.json.types.base.TextQuote;

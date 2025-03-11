@@ -1,9 +1,8 @@
 package net.strdev.telegramlib.requests;
 
-import net.strdev.telegramlib.json.Json;
-import net.strdev.telegramlib.json.types.base.LinkPreviewOptions;
 import net.strdev.telegramlib.network.TelegramRequest;
 import net.strdev.telegramlib.types.serializable.InlineKeyboardMarkup;
+import net.strdev.telegramlib.types.serializable.LinkPreviewOptions;
 import net.strdev.telegramlib.types.serializable.MessageEntity;
 
 import java.util.Arrays;
@@ -59,7 +58,7 @@ public class editMessageText extends TelegramRequest {
     }
 
     public editMessageText link_preview_options(LinkPreviewOptions value) {
-        addQuery("link_preview_options", Json.parser.toJson(value));
+        addQuery("link_preview_options", value.asString());
         return this;
     }
 
