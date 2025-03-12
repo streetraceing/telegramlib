@@ -3,11 +3,15 @@ package net.strdev.telegramlib.requests;
 import net.strdev.telegramlib.json.Json;
 import net.strdev.telegramlib.network.TelegramRequest;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class getUpdates extends TelegramRequest {
     public getUpdates(String token) {
         super(token, "getUpdates");
+    }
+
+    public getUpdates() {
+        super("getUpdates");
     }
 
     public getUpdates offset(int value) {
@@ -25,8 +29,8 @@ public class getUpdates extends TelegramRequest {
         return this;
     }
 
-    public getUpdates allowed_updates(List<String> value) {
-        addQuery("allowed_updates", Json.parser.toJson(value));
+    public getUpdates allowed_updates(String[] value) {
+        addQuery("allowed_updates", Json.parser.toJson(Arrays.asList(value)));
         return this;
     }
 }
